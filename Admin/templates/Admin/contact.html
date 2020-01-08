@@ -1,0 +1,37 @@
+{%extends 'partner/main.html'%}
+{%block content%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="py-2"> Contacts </h2>
+        </div>
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/partner/dashboard">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Contacts</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-12 px-0">
+            <div class="container-fluid">
+                <div class="row">
+                    {%for i in contacts%}
+                    <div class="col-md-4 py-2">
+                        <div class="card border-success">
+                            <div class="card-header text-center border-success"><strong class="text-success">{{i.email}}</strong></div>
+                            <div class="card-body">
+                                <div class="float-left">
+                                    <p><strong>Name - {{i.name}}</strong><br>Subject - {{i.subject}}</p>
+                                    <small>{{i.message}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

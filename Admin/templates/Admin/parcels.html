@@ -1,0 +1,140 @@
+{%extends 'Admin/main.html'%}
+{%block content%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 ">
+            <h2 class="my-2"> Orders </h2>
+        </div>
+        <div class="col-md-12 ">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/partner/dashboard">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Orders</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-12">
+            {%for i in userOrders%}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 mb-md-3 pt-2 mt-md-0 mt-3 p-md-3 border border-primary rounded-left">
+                        {%for j in i|slice:'0:1'%}
+                        <h4>{{forloop.parentloop.counter}}. {{j.first_name}} {{j.last_name}}</h4>
+                        <p>{{j.email}}<br>
+                            {{j.placed_at}}</p>
+                        <h5 class="mt-4">Shipping Address</h5>
+                        <p>
+                            {{j.address_1}}, {{j.address_2}},<br>
+                            {{j.city}},
+                            {{j.state}}, {{j.zip}}<br>
+                            Phone - {{j.phone}}
+                        </p>
+                        {%endfor%}
+                        <div class="mt-4">
+                            <h5>Order Summary</h5>
+                            <table class="table table-sm">
+                                {%for j in i%}
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <h6 class="my-0">{{j.prod_name}}</h6>
+                                        </th>
+                                        <th><span class="text-muted">&#8377 {{j.prod_price}}.00</span></th>
+                                    </tr>
+                                <tbody>
+                                    {%endfor%}
+                                    {%for k,l in deliveryAndTotalPrice%}
+                                    {%if forloop.parentloop.counter is forloop.counter%}
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <h6 class="my-0">Delivery Charge</h6>
+                                        </th>
+                                        <th><span class="text-muted">&#8377 {{l}}.00</span></th>
+                                    </tr>
+                                <tbody>
+                                <tbody>
+                                    <tr>
+                                        <th><span class="text-success">Total (RUPEES)</span></th>
+                                        <th><strong class="text-success">&#8377 {{k}}.00</strong></th>
+                                    </tr>
+                                <tbody>
+                                    {%endif%}
+                                    {%endfor%}
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-8 p-md-3 pt-3 p-0 mb-md-3 border-primary rounded-right border">
+                        <div class="table-responsive" style="border:none;">
+                            <table class="table table-sm">
+                                <thead class="bg-primary">
+                                    <tr style="text-align: center;" class="bg-light">
+                                        <!-- <th>ID</th> -->
+                                        <th>#</th>
+                                        <th style="text-align: left;">Product</th>
+                                        <th class="text-center">Price</th>
+                                        <th width="15%" class="text-center">Date</th>
+                                        <th class="text-center">Track</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%for i in i%}
+                                    <tr style="text-align: center;">
+                                        <!-- <td>{{i.track_id}}</td> -->
+                                        <td><img class="pic-1 p-2" src="/media/{{i.prod_img}}" width="100px"></td>
+                                        <td style="text-align: left;">{{i.prod_qty}} x <a href="/shop/product/{{i.prod_type}}/{{i.prod_id}}"><strong>{{i.prod_name}}</strong></a><br><small>{{i.prod_desc}}</small></td>
+                                        <td>&#8377 {{i.prod_price}}</td>
+                                        <td width="15%">{{i.placed_at}}</td>
+                                        <td><a class="btn btn-sm py-0 my-2 btn-primary" href="/user/orders/tracker/{{i.id}}" role="button">Track</a></td>
+                                        {%if "Pending" in i.status%}
+                                        <td>
+                                            <div class="progress my-2 px-5">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: 0%;">
+                                                    <strong>{{i.status}}</strong></div>
+                                            </div>
+                                        </td>
+                                        {%elif "Ordered" in i.status%}
+                                        <td>
+                                            <div class="progress my-2">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger p-1" role="progressbar" style="width: 20%;"><strong>{{i.status}}</strong></div>
+                                            </div>
+                                        </td>
+                                        {%elif "ShippingSoon" in i.status%}
+                                        <td>
+                                            <div class="progress my-2">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning p-1" role="progressbar" style="width: 40%"><strong>{{i.status}}</strong></div>
+                                            </div>
+                                        </td>
+                                        {%elif "Shipped" in i.status%}
+                                        <td>
+                                            <div class="progress my-2">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info p-1" role="progressbar" style="width: 60%"><strong>{{i.status}}</strong></div>
+                                            </div>
+                                        </td>
+                                        {%elif "OutForDelivery" in i.status%}
+                                        <td>
+                                            <div class="progress my-2">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary p-1" role="progressbar" style="width: 75%"><strong>{{i.status}}</strong></div>
+                                            </div>
+                                        </td>
+                                        {%elif "Delivered" in i.status%}
+                                        <td>
+                                            <div class="progress my-2">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success p-1" role="progressbar" style="width: 100%"><strong>{{i.status}}</strong></div>
+                                            </div>
+                                        </td>
+                                        {%endif%}
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+{%endblock%}

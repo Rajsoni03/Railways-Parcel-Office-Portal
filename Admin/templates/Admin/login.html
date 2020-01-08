@@ -1,0 +1,73 @@
+{%include 'partner/header.html'%}
+<style>
+    body {
+    background: #000 !important;
+}
+.card {
+    border: 2px solid #FD6165;
+}
+.card-login {
+    margin-top: 130px;
+    padding: 18px;
+    max-width: 20rem;
+}
+
+.card-header {
+    color: #fff;
+    background: #ff0000;
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: 600 !important;
+}
+
+.input-group-prepend span{
+    width: 40px;
+    background-color: #FD6165;
+    color: #fff;
+    border:0 !important;
+}
+
+.login_btn{
+    width: 100%;
+}
+
+.login_btn:hover{
+    background-color: #FD6165;
+}
+
+</style>
+<div class="container">
+    <div class="card card-login mx-auto text-center bg-dark">
+        <div class="card-header mx-auto bg-dark">
+            <h1 style="color: #FD6165;"><strong>Book Store</strong></h1><br>
+            <span class="logo_title mt-5"> Login Dashboard </span>
+        </div>
+        <div class="card-body">
+            <form method="post">{% csrf_token %}
+            	<div>
+                    {%for msg in messages%}
+                    {% if msg %}
+                    <span style="color: red;">{{msg}}</span>
+                    {%endif%}
+                    {%endfor%}
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                    </div>
+                    <input type="text" name="email" class="form-control" required placeholder="Username">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-key"></i></span>
+                    </div>
+                    <input type="password" name="password" class="form-control" required placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="btn" value="Login" class="btn btn-outline-danger float-right login_btn">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{%include 'partner/footer.html'%}

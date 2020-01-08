@@ -1,0 +1,155 @@
+{%extends 'partner/main.html'%}
+{%block content%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="py-2"> Customers </h2>
+        </div>
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/partner/dashboard">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Customers</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-12 p-0 m-0">
+            <div class="container-fluid">
+                <div class="row">
+                    {%for i in staffCustomers%}
+                    {%for j in staffProfile%}
+                    {%if forloop.counter is forloop.parentloop.counter%}
+                    <div class="col-md-6 py-2">
+                        <div class="card border-primary" style="box-shadow: 0px 0px 10px #007BFF;">
+                            <div class="card-header text-center border-primary"><strong class="text-primary">Admin</strong></div>
+                            <div class="card-body">
+                                <div class="pl-md-2 d-flex">
+                                    <img src="/media/{{j.pic}}" width="30%" height="30%">
+                                    <div class="ml-5 float-right" style="box-shadow: 0px 0px 10px gray;">
+                                        <div class="card-header tab-card-header bg-white">
+                                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="one-tab" data-toggle="tab" href="#one{{i.id}}" role="tab" aria-controls="One" aria-selected="true">Profile</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="two-tab" data-toggle="tab" href="#two{{i.id}}" role="tab" aria-controls="Two" aria-selected="false">Info</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="three-tab" data-toggle="tab" href="#three{{i.id}}" role="tab" aria-controls="Three" aria-selected="false">Permission</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active p-3" id="one{{i.id}}" role="tabpanel" aria-labelledby="one-tab">
+                                                <div class="float-left pb-3">
+                                                    <h5 class="card-title">{{i.id}}-{{i.first_name}} {{i.last_name}}</h5>
+                                                    <p class="card-text">{{i.email}}</p>
+                                                    <a href="#" class="btn btn-primary btn-sm">About</a>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade p-3" id="two{{i.id}}" role="tabpanel" aria-labelledby="two-tab">
+                                                <p class="card-text"><strong>Phone -</strong> {{j.phone}}</p>
+                                                <p class="card-text mb-2"><strong>Joined at -</strong> {{i.date_joined}}</p>
+                                                <p class="card-text"><strong>Address -</strong> {{j.address1}}, {{j.address2}}, {{j.city}}, {{j.state}}</p>
+                                            </div>
+                                            <div class="tab-pane fade px-3 py-2" id="three{{i.id}}" role="tabpanel" aria-labelledby="three-tab">
+                                                <!-- <h5 class="card-title">{{customer.is_active}}</h5> -->
+                                                <p class="card-text"></p>
+                                                <form method="post" name="f1">{% csrf_token %}
+                                                    <div class="custom-control custom-switch form-froup mx-3">
+                                                        <input type="checkbox" class="custom-control-input" id="customSwitch1{{i.id}}" name="activebtn" {%if i.is_active%}checked{%endif%}>
+                                                        <label class="custom-control-label" for="customSwitch1{{i.id}}"> Active</label>
+                                                    </div><br>
+                                                    <div class="custom-control custom-switch form-group mx-3">
+                                                        <input type="checkbox" class="custom-control-input" id="customSwitch2{{i.id}}" name="staffbtn" {%if i.is_staff%}checked{%endif%}>
+                                                        <label class="custom-control-label" for="customSwitch2{{i.id}}"> Staff</label>
+                                                    </div><br>
+                                                    <button type="submit" name="submit" value="{{i.id}}" class="btn btn-sm btn-primary">Save</button>
+                                                    {% if perms.auth.delete_user %}
+                                                    <button type="submit" name="delete" value="{{i.id}}" class="btn btn-sm btn-danger">Delete</button>
+                                                    {% endif %}
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%endif%}
+                    {%endfor%}
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="container-fluid">
+                <div class="row">
+                    {%for customer in allCustomers%}
+                    {%for i in profile%}
+                    {%if forloop.counter is forloop.parentloop.counter%}
+                    <div class="col-md-3 py-3">
+                        {%if customer.is_active%}
+                        <div class="card tab-card" style="box-shadow: 0px 0px 10px #33BB33;">
+                            {%else%}
+                            <div class="card tab-card" style="box-shadow: 0px 0px 10px #EF5350;">
+                                {%endif%}
+                                <div class="card-header tab-card-header">
+                                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#one{{customer.id}}" role="tab" aria-controls="One" aria-selected="true">Profile</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="two-tab" data-toggle="tab" href="#two{{customer.id}}" role="tab" aria-controls="Two" aria-selected="false">Info</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="three-tab" data-toggle="tab" href="#three{{customer.id}}" role="tab" aria-controls="Three" aria-selected="false">Permission</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active p-3" id="one{{customer.id}}" role="tabpanel" aria-labelledby="one-tab">
+                                        <div class="float-left pb-3">
+                                            <h5 class="card-title">{{customer.id}}-{{customer.first_name}} {{customer.last_name}}</h5>
+                                            <p class="card-text">{{customer.email}}</p>
+                                            <a href="#" class="btn btn-primary btn-sm">About</a>
+                                        </div>
+                                        <div class="float-right">
+                                            <img src="/media/{{i.pic}}" height="100px" class="rounded">
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade p-3" id="two{{customer.id}}" role="tabpanel" aria-labelledby="two-tab">
+                                        <p class="card-text"><strong>Phone -</strong> {{i.phone}}</p>
+                                        <p class="card-text mb-2"><strong>Joined at -</strong> {{customer.date_joined}}</p>
+                                        <p class="card-text"><strong>Address -</strong> {{i.address1}}, {{i.address2}}, {{i.city}}, {{i.state}}</p>
+                                    </div>
+                                    <div class="tab-pane fade px-3 py-2" id="three{{customer.id}}" role="tabpanel" aria-labelledby="three-tab">
+                                        <!-- <h5 class="card-title">{{customer.is_active}}</h5> -->
+                                        <p class="card-text"></p>
+                                        <form method="post" name="f1">{% csrf_token %}
+                                            <div class="custom-control custom-switch form-froup mx-3">
+                                                <input type="checkbox" class="custom-control-input" id="customSwitch1{{customer.id}}" name="activebtn" {%if customer.is_active%}checked{%endif%}>
+                                                <label class="custom-control-label" for="customSwitch1{{customer.id}}"> Active</label>
+                                            </div><br>
+                                            <div class="custom-control custom-switch form-group mx-3">
+                                                <input type="checkbox" class="custom-control-input" id="customSwitch2{{customer.id}}" name="staffbtn" {%if customer.is_staff%}checked{%endif%}>
+                                                <label class="custom-control-label" for="customSwitch2{{customer.id}}"> Staff</label>
+                                            </div><br>
+                                            <button type="submit" name="submit" value="{{customer.id}}" class="btn btn-sm btn-primary">Save</button>
+                                            {% if perms.auth.delete_user %}
+                                            <button type="submit" name="delete" value="{{customer.id}}" class="btn btn-sm btn-danger">Delete</button>
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%endif%}
+                        {%endfor%}
+                        {%endfor%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endblock%}
