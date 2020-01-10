@@ -1,3 +1,142 @@
 {%include 'Main/base.html'%}
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.css' rel='stylesheet' />
 
-<h1>dashboard</h1>
+<style>
+
+.card-counter {
+    box-shadow: 2px 2px 10px #DADADA;
+    margin: 5px;
+    padding: 20px 10px;
+    background-color: #fff;
+    height: 100px;
+    border-radius: 5px;
+    transition: .3s linear all;
+}
+
+.card-counter:hover {
+    box-shadow: 4px 4px 20px #DADADA;
+    transition: .3s linear all;
+}
+
+.card-counter.primary {
+    background-color: #007bff;
+    color: #FFF;
+}
+
+.card-counter.danger {
+    background-color: #ef5350;
+    color: #FFF;
+}
+
+.card-counter.success {
+    background-color: #66bb6a;
+    color: #FFF;
+}
+
+.card-counter.info {
+    background-color: #26c6da;
+    color: #FFF;
+}
+
+.card-counter i {
+    font-size: 5em;
+    opacity: 0.2;
+}
+
+.card-counter .count-numbers {
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    font-size: 32px;
+    display: block;
+}
+
+.card-counter .count-name {
+    position: absolute;
+    right: 35px;
+    top: 65px;
+    font-style: italic;
+    text-transform: capitalize;
+    opacity: 0.5;
+    display: block;
+    font-size: 18px;
+}
+</style>
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-md-3">
+            <a href="/partner/orders" class="text-light">
+                <div class="card-counter primary">
+                    <i class="fa fa-gift"></i>
+                    <span class="count-numbers">{{noOfOrders}}</span>
+                    <span class="count-name">Parcels Details</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/partner/customers" class="text-light">
+                <div class="card-counter danger">
+                    <i class="fa fa-users"></i>
+                    <span class="count-numbers">{{noOfUsers}}</span>
+                    <span class="count-name">Parcel Offices</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/partner/products" class="text-light">
+                <div class="card-counter success">
+                    <i class="fa fa-database"></i>
+                    <span class="count-numbers">{{noOfProducts}}</span>
+                    <span class="count-name">Products</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="/partner/contacts" class="text-light">
+                <div class="card-counter info">
+                    <i class="fa fa-users"></i>
+                    <span class="count-numbers">{{noOfContacts}}</span>
+                    <span class="count-name">Contacts</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-6 mt-4 ml-5 bg-light">
+            {%for i in trains%}
+                <hr>
+                <div class="row">
+                    <div class="col-4">
+                        {{forloop.counter}}. {{i.date}} - <a href="/diary/page/{{diary.id}}"><b>{{i.train_no}}</b>, {{i.train_from}}-{{i.train_to}}</a>
+                    </div>
+                    <div class="col-6">
+                        <div class="progress mt-2">
+                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 30%">{{i.train_fro}}</div>
+                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"><span class="fa fa-train"></span></div>
+                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: 70%">{{i.train_t}}</div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <form method="POST" action="track">{% csrf_token %}
+                            <button type="submit" class="btn btn-outline-dark btn-sm"><span class="fa fa-map-marker"></span> Track</button>
+                            <input hidden name="train_id" value="{{i.id}}">
+                        </form>
+                    </div>
+                    <div class="dropdown-divider bg-dark"></div>
+                </div>
+            {%endfor%}
+        </div>
+
+        <div class="col-5 mt-4 ml-4 " id='map' style='width: 100%; height: 300px;'>
+
+        </div>
+        <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoicmFqc29uaTAzIiwiYSI6ImNrNThmY25tYTA3MWwzbG50bzdndXZ5ZngifQ.-fSnHZymHAiDIUBKSuQGAQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9'
+        });
+        </script>
+
+    </div>
+</div>
