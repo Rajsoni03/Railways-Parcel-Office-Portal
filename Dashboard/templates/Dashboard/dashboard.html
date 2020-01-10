@@ -117,7 +117,7 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <form method="POST" action="track">{% csrf_token %}
+                        <form method="POST" action="track/">{% csrf_token %}
                             <button type="submit" class="btn btn-outline-dark btn-sm"><span class="fa fa-map-marker"></span> Track</button>
                             <input hidden name="train_id" value="{{i.id}}">
                         </form>
