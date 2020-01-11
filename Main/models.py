@@ -29,3 +29,11 @@ class Train(models.Model):
     tarin_days = models.CharField(max_length=7)
     train_from_time = models.TimeField(default=timezone.now())
     train_to_time = models.TimeField(default=timezone.now())
+
+class Station(models.Model):
+    station_id = models.CharField(max_length=50)
+    location = models.CharField(max_length=100)
+    lat = models.CharField(max_length=100)
+    long = models.CharField(max_length=100)
+    total_train = models.PositiveIntegerField()
+    phone = models.CharField(max_length=15)
