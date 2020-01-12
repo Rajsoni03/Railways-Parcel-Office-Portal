@@ -1,14 +1,10 @@
-{%extends 'Admin/main.html'%}
-{%block content%}
+{%include 'Main/base.html'%}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-            <h2 class="py-2"> Parcel Offices </h2>
-        </div>
-        <div class="col-md-12">
+        <div class="col-md-12 mt-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/partner/dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/myAdmin">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Parcel Offices</li>
                 </ol>
             </nav>
@@ -42,8 +38,9 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active p-3" id="one{{customer.id}}" role="tabpanel" aria-labelledby="one-tab">
                                     <div class="float-left pb-3">
-                                        <h5 class="card-title">{{forloop.parentloop.counter}} - {{customer.first_name}} ({{customer.last_name}})</h5>
-                                        <p class="card-text">{{customer.email}}</p>
+                                        <h5 class="card-title">{{forloop.parentloop.counter}} - {{i.station_name}} ({{customer.first_name}})</h5>
+                                        <p class="card-text"><strong>User</strong> - {{customer.last_name}}<br>
+                                        <strong>ID</strong> - {{customer.email}}</p>
                                         <a href="#" class="btn btn-primary btn-sm">About</a>
                                     </div>
                                 </div>
@@ -51,6 +48,7 @@
                                     <p class="card-text"><strong>Phone -</strong> {{i.phone}}</p>
                                     <p class="card-text mb-2"><strong>Joined at -</strong> {{customer.date_joined}}</p>
                                     <p class="card-text"><strong>Address -</strong> {{i.location}}</p>
+                                    <p class="card-text"><strong>Map -</strong> {{i.lat}}, {{i.long}}</p>
                                 </div>
                                 <div class="tab-pane fade px-3 py-2" id="three{{customer.id}}" role="tabpanel" aria-labelledby="three-tab">
                                     <!-- <h5 class="card-title">{{customer.is_active}}</h5> -->
@@ -77,4 +75,3 @@
             </div>
         </div>
     </div>
-{%endblock%}

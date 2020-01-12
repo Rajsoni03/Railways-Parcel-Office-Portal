@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
     <title>SIH</title>
   </head>
@@ -28,15 +30,17 @@
                 <li class="nav-item active border-right">
                     <a class="nav-link" href="/"><b>Home</b></a>
                 </li>
+            {% if user.is_authenticated %}
                 <li class="nav-item active border-right">
-                    <a class="nav-link" href="/dashboard"><b>Dashboard</b></a>
+                    <a class="nav-link" href="{% if user.is_staff %}/myAdmin{%else%}/dashboard{%endif%}"><b>Dashboard</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active border-right" href="/track"><b>Live Traking</b></a>
+                    <a class="nav-link active border-right" href="{% if user.is_staff %}/myAdmin/track{%else%}/track{%endif%}"><b>Live Traking</b></a>
                 </li>
                 <li class="nav-item border-right">
-                    <a class="nav-link active" href="/train"><b>Train</b></a>
+                    <a class="nav-link active" href="{% if user.is_staff %}/myAdmin/train{%else%}/train{%endif%}"><b>Train</b></a>
                 </li>
+            {%endif%}
                 <li class="nav-item active dropdown border-right">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <b>About</b>
@@ -46,19 +50,33 @@
                         <a class="dropdown-item" href="/about/2">Parcel Office</a>
                     </div>
                 </li>
+
+            {% if user.is_authenticated %}
                 <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Login</b>
+                        <b class="text-warning">{{user.first_name}}</b>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <a class="dropdown-item" href="/">Setting</a>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+            {%else%}
+                <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <b>Login</b>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                         <a class="dropdown-item" href="/login">Parcel Office</a>
                         <a class="dropdown-item" href="/myAdmin/login">Admin</a>
                     </div>
                 </li>
+            {%endif%}
+
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-sm  my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-sm btn-light my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
     </nav>

@@ -32,6 +32,7 @@ class Train(models.Model):
 
 class Station(models.Model):
     station_id = models.CharField(max_length=50)
+    station_name = models.CharField(max_length=50)
     location = models.CharField(max_length=100)
     lat = models.CharField(max_length=100)
     long = models.CharField(max_length=100)

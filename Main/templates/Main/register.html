@@ -1,0 +1,46 @@
+{% include 'Main/base.html' %}
+<div class="m-4">
+
+    <form action="register" method="post">
+        {% csrf_token %}
+
+        <table>
+            <tr>
+                <td>Station Name</td> <td><input type="text" name="station_name" placeholder="Station Name"></td>
+            </tr>
+
+            <tr>
+                <td>Station Code</td> <td><input type="text" name="station_code" placeholder="Station Code"></td>
+            </tr>
+
+            <tr>
+                <td>User Name</td> <td><input type="text" name="user_name" placeholder="User Name"></td>
+            </tr>
+
+            <tr>
+                <td>Total Train</td> <td><input type="text" name="total_train" placeholder="Total Train"></td>
+            </tr>
+
+            <tr>
+                <td>Phone</td> <td><input type="text" name="phone" placeholder="Phone"></td>
+            </tr>
+
+            <tr>
+                <td>password</td><td><input type="password" name="password1" placeholder="Password"></td>
+            </tr>
+
+            <tr>
+                <td>confirm password</td><td><input type="password" name="password2" placeholder="Confirm Password"></td>
+            </tr>
+
+            <tr>
+                <td><input type="submit"></td>
+            </tr>
+        </table>
+    </form>
+    <div>
+        {%for message in messages %}
+        {{message}}
+        {%endfor%}
+    </div>
+</div>

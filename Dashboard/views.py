@@ -10,7 +10,7 @@ def dashboard(request):
     return render(request, 'Dashboard/dashboard.html', params)
 
 # def adminHome(request):
-#     return render(request, 'Admin/dashboard.html')
+#     return render(request, 'MyAdmin/dashboard.html')
 
 # def parcels(request):
-#     return render(request, 'Admin/parcels.html')
+#     return render(request, 'MyAdmin/parcels.html')

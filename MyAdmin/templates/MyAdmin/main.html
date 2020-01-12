@@ -1,6 +1,6 @@
 {%include 'Admin/header.html'%}
 {%load static%}
-<link rel="stylesheet" href="{%static 'Admin/style.css'%}">
+<link rel="stylesheet" href="{%static 'Admin/AdminStyle.css'%}">
 <header class="header">
     <nav class="navbar navbar-toggleable-md  navbar-light pt-0 pb-0">
         <button class="navbar-toggler navbar-toggler-right mt-2" style="font-size: 10px;" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,7 @@
         });
         // $(document).ready(function(){
         //     if ($(window).width() < 960) {
-        //        $('.sidebar').toggleClass('fliph');     
+        //        $('.sidebar').toggleClass('fliph');
         //     }
         // });
         function screenClass() {
@@ -27,15 +27,15 @@
         screenClass();
         </script>
         <div class="float-left d-none d-md-block"> <a href="#" class="button-left"><span class="fa fa-fw fa-bars "></span></a> </div>
-        <a class="navbar-brand ml-md-5 text-light" href="/partner/dashboard">SLR Parcel Admin</a>
+        <a class="navbar-brand ml-md-5 text-light" href="/partner/dashboard">Book Store</a>
         <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown messages-menu">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell-o"></i>
                         <span class="label label-success bg-danger">10</span>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <ul class="dropdown-menu-over list-unstyled">
                             <li class="header-ul text-center">You have 4 messages</li>
                             <li>
@@ -110,11 +110,11 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown notifications-menu">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-envelope-o"></i>
                         <span class="label label-warning bg-danger">10</span>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <ul class="dropdown-menu-over list-unstyled">
                             <li class="header-ul text-center">You have 10 notifications</li>
                             <li>
@@ -183,7 +183,7 @@
                 </div>
             </div>
             <ul class="list-sidebar bg-defoult">
-                <li> <a href="/partner/dashboard" class="collapsed active"><i class="fa fa-th-large"></i> <span class="nav-label"> Dashboard</span></a> </li>
+                <li> <a href="/partner/dashboard" class="collapsed active"><i class="fa fa-th-large""></i> <span class="nav-label"> Dashboard</span></a> </li>
 
                 <li> <a href="#" data-toggle="collapse" data-target="#manage" class="collapsed active"> <i class="fa fa-users"></i> <span class="nav-label"> Manage </span> <span class="fa fa-chevron-left pull-right"></span> </a>
                     <ul class="sub-menu collapse" id="manage">
@@ -228,10 +228,10 @@
                 <li> <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a> </li>
             </ul>
         </div>
-        
+
         {%block content%}
-        {%endblock%}            
-        
+        {%endblock%}
+
     </aside>
 </div>
-{%include 'Admin/footer.html'%}
+{%include 'partner/footer.html'%}

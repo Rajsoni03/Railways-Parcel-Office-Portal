@@ -1,8 +1,119 @@
 {% include 'Main/base.html' %}
-<h1>About
+<style>
+#header{
+	position : static ;
+	background : #B94629;
+	height : 82px;
+	margin : 0px 0px 0px 0px ;
+}
+
+body{
+	margin: 0px ;
+	background-color : #E89F65 ;
+	background-size : cover ;
+	background-attachment : fixed ;
+}
+
+#title{
+	font-family : courier new ;
+	color : white;
+	font-size: 40px;
+	padding : 20px 25px 23px 20px ;
+	position : absolute ;
+	text-decoration : none ;
+	left : 550px ;
+}
+
+#main_body{
+	font-family : courier new ;
+	color : black ;
+	font-size : 60px ;
+	text-decoration : none ;
+	margin-left : 80px ;
+	margin-right : 80px ;
+	margin-top : 20px ;
+}
+hr{
+	display : block ;
+	margin : auto ;
+	margin-left : 0px ;
+	margin-top : auto ;
+	margin-bottom : 0.5em ;
+	border-style : inset ;
+	color : black ;
+}
+p{
+	font-family : courier new ;
+	color : black ;
+	font-size : 20px ;
+}
+
+#footer{
+	height: 40px;
+	background-color: #B94629;
+	font-weight : bold;
+	position: fixed;
+	bottom: 0px;
+	color: white;
+	font-size: 12px;
+	width: 100%;
+	padding-left: 50px;
+}
+
+</style>
+
+<div id="header">
+    <span id="title">{%if about_page_no is 1%}Indian Railways{%else%}Parcel Office{%endif%}</span>
+</div>
+
+<div id="main_body">
     {%if about_page_no is 1%}
-    Railway
+        About Us
+        <hr>
+        <p>
+            The first railway on Indian sub-continent ran over a stretch of 21 miles from Bombay
+            to Thane.<br />The idea of a railway to connect Bombay with Thane, Kalyan and with the
+            Thal and Bhore Ghats inclines<br />first occurred to Mr. George Clark, the Chief Engineer
+            of the Bombay Government, during a visit to<br /> Bhandup in 1843.
+        </p>
+        <p>
+            The formal inauguration ceremony was performed on 16th April 1853, when 14 railway
+            carriages carrying <br /> about 400 guests left Bori Bunder at 3.30 pm "amidst the loud applause
+            of a vast multitude and to the <br /> salute of 21 guns." The first passenger train steamed
+            out of Howrah station destined for Hooghly, a <br />distance of 24 miles, on 15th August, 1854.
+            Thus the first section of the East Indian Railway was opened<br />to public traffic,
+            inaugurating the beginning of railway transport on the Eastern side of subcontinent.
+        </p>
+        <p>
+            In south the first line was opened on 1st July, 1856 by the Madras Railway Company.
+            It ran between <br />Vyasarpadi Jeeva Nilayam (Veyasarpandy) and Walajah Road (Arcot), a distance
+            of 63 miles. In the North<br /> a length of 119 miles of line was laid from Allahabad to
+            Kanpur on 3rd March 1859. The first section <br />from Hathras Road to Mathura Cantonment
+            was opened to traffic on 19th October, 1875.
+        </p>
+        <p>
+            These were the small beginnings which is due course developed into a network of railway
+            lines all over <br />the country. By 1880 the Indian Railway system had a route mileage of
+            about 9000 miles. INDIAN RAILWAYS,<br /> the premier transport organization of the country is the largest rail network in Asia and the world's <br />second largest under one management.
+        </p>
     {%else%}
-    PO
+        About Us
+        <hr>
+        <p>
+            Keeping in pace with new technology changes, Centre for Railway Information Systems (CRIS), the IT <br />wing of Indian Railways, developed an enhanced new interface for dissemination of information to public.<br />National Freight Enquiry System developed is a backend system which collects information about train<br />running on near real time basis and disseminates information through interfaced Website.
+        </p>
+        <p>
+            The new interface, which offers quick and easy access to essential information of parcel safety, has<br />been largely appreciated for its speed, simple interface and richness of information and smooth user<br />experience.
+        </p>
+        <p>
+            A light weight mobile compatible web interface will also be launched to serve various types of enquiries<br />though mobile internet while on move in no time. Classic and Modern flavours of mobile web version will<br />be provided to support Generic mobiles and Smartphones.
+        </p>
+        <p>
+            One of the best features of this system is lock status which provides information such as its current<br />stats and time of arrival and departure from a particular station.
+        </p>
+        <p>
+            Some general characteristics are that all train numbers with parcel vans will be displayed in different<br />pages will be hyperlinked to view the schedule and current status. Pages have been kept light weight<br />to enhance the speed of the website. All the information is navigable from a single home page with the<br />minimum clicks.
+        </p>
     {%endif%}
-</h1>
+</div>
+<div id="footer"></div>

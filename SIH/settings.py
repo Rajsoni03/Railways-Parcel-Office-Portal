@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'User',
-    'Admin',
+    'MyAdmin',
     'Main',
     'LiveTracking',
     'Dashboard',

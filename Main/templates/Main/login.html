@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% include 'Main/base.html' %}
+<div class="m-4">
     <form action ='login' method ='post'>
         {% csrf_token %}
         <input type="text" name="username" placeholder="username"/><br>
@@ -15,7 +10,6 @@
         {%for message in messages %}
         {{message}}
         {%endfor%}
-    </div>>
-
-</body>
-</html>
+    </div>
+    <a href = "/register" >register </a
+</div>
