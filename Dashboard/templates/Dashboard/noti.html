@@ -1,0 +1,47 @@
+{%include 'Main/base.html'%}
+<div class="col-md-12 mt-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Notifications</li>
+        </ol>
+    </nav>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        {%for i in notification%}
+        <div class="col-12 px-3">
+            <div class="card border-danger mb-3">
+                <div class="card-header text-white bg-danger">
+					<div class="container-fluid">
+					    <div class="row">
+		                	<div class="col-4">
+		                		<b>Warning: {{forloop.counter}}</b>
+		                	</div>
+		                	<div class="col-4 text-center">
+		                		{{i.date}}
+		                	</div>
+		                </div>
+		            </div>
+                </div>
+                <div class="card-body text-danger">                	
+					<div class="container-fluid">
+					    <div class="row">
+                    		<h5 class="card-title col-12"><b>{{i.msg}}</b></h5>
+		                    <p class="card-text col-4">
+		                    	<b>Train No.</b> - {{i.train_no}}<br>
+		                    	<b>location</b> - {{i.location}}<br>
+		                    </p>
+		                </div>
+		            </div>
+                </div>
+
+                <div class="card-footer bg-white text-right">
+				    <a type="button" class="btn btn-danger" href="#">Track</a>
+				</div>
+
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>

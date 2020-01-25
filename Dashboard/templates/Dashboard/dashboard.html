@@ -66,44 +66,46 @@
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col-md-3">
-            <a href="/partner/orders" class="text-light">
+            <a href="/dashboard/send" class="text-light">
                 <div class="card-counter primary">
                     <i class="fa fa-gift"></i>
-                    <span class="count-numbers">{{noOfOrders}}</span>
-                    <span class="count-name">Parcels Details</span>
+                    <span class="count-numbers">{{noOfParcelSend}}</span>
+                    <span class="count-name">Parcels Send</span>
                 </div>
             </a>
         </div>
         <div class="col-md-3">
-            <a href="/partner/customers" class="text-light">
+            <a href="/dashboard/recieve" class="text-light">
                 <div class="card-counter danger">
-                    <i class="fa fa-users"></i>
-                    <span class="count-numbers">{{noOfUsers}}</span>
-                    <span class="count-name">Parcel Offices</span>
+                    <i class="fa fa-archive"></i>
+                    <span class="count-numbers">{{noOfParcelRecieve}}</span>
+                    <span class="count-name">Parcels Recieve</span>
                 </div>
             </a>
         </div>
         <div class="col-md-3">
-            <a href="/partner/products" class="text-light">
+            <a href="/dashboard/train" class="text-light">
                 <div class="card-counter success">
-                    <i class="fa fa-database"></i>
-                    <span class="count-numbers">{{noOfProducts}}</span>
-                    <span class="count-name">Products</span>
+                    <i class="fa fa-train"></i>
+                    <span class="count-numbers">{{noOfTrain}}</span>
+                    <span class="count-name">All Tarins</span>
                 </div>
             </a>
         </div>
         <div class="col-md-3">
-            <a href="/partner/contacts" class="text-light">
+            <a href="/dashboard/noti" class="text-light">
                 <div class="card-counter info">
                     <i class="fa fa-users"></i>
-                    <span class="count-numbers">{{noOfContacts}}</span>
-                    <span class="count-name">Contacts</span>
+                    <span class="count-numbers">{{noOfNoti}}</span>
+                    <span class="count-name">Notification</span>
                 </div>
             </a>
         </div>
 
         <div class="col-6 mt-4 ml-5 bg-light">
             {%for i in trains%}
+            {%for j in train_range%}
+            {%if forloop.counter is forloop.parentloop.counter%}
                 <hr>
                 <div class="row">
                     <div class="col-4">
@@ -111,32 +113,38 @@
                     </div>
                     <div class="col-6">
                         <div class="progress mt-2">
-                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 30%">{{i.train_fro}}</div>
-                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"><span class="fa fa-train"></span></div>
-                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: 70%">{{i.train_t}}</div>
+                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: {{j}}%"></div>
+                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"><span class="fa fa-train"></span></div>
+                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: 0%">{{i.train_t}}</div>
                         </div>
                     </div>
                     <div class="col-2">
-                        <form method="POST" action="track/">{% csrf_token %}
+                        <form method="POST" action="dashboard/track">{% csrf_token %}
                             <button type="submit" class="btn btn-outline-dark btn-sm"><span class="fa fa-map-marker"></span> Track</button>
                             <input hidden name="train_id" value="{{i.id}}">
                         </form>
                     </div>
                     <div class="dropdown-divider bg-dark"></div>
                 </div>
+            {%endif%}
+            {%endfor%}
             {%endfor%}
         </div>
 
-        <div class="col-5 mt-4 ml-4 " id='map' style='width: 100%; height: 300px;'>
+        <div class="col-5 mt-4 ml-4 pl-0" id='map' style='width: 100%; height: 300px;'>
 
         </div>
         <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoicmFqc29uaTAzIiwiYSI6ImNrNThmY25tYTA3MWwzbG50bzdndXZ5ZngifQ.-fSnHZymHAiDIUBKSuQGAQ';
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11'
+            style: 'mapbox://styles/mapbox/streets-v8',
+            center: [79.950,23.165],
+            zoom : 15,
+
         });
         </script>
+
 
     </div>
 </div>

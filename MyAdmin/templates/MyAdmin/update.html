@@ -1,0 +1,22 @@
+{%include 'Main/base.html'%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-2">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/myAdmin">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Live Tracking</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<form class="mx-5" method="post">{% csrf_token %}
+    Train ID : <input type="text" name="train_ID" value="{{train_ID}}"><br>
+    Lat : <input type="text" name="lat" value="{{lat}}"><br>
+    Long : <input type="text" name="long" value="{{long}}"><br>
+    Seal Status : <input type="checkbox" name="seal_status" {{check1}}>
+    Parcel Status : <input type="checkbox" name="parcel_status" {{check2}}><br>
+    <input type="text" name="id" hidden value="{{id}}">
+    <button type="submit">Next</button>
+</form>

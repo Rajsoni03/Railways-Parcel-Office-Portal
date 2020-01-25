@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
 from .models import Station
 from geopy.geocoders import Nominatim
@@ -12,13 +11,6 @@ def index(request):
         'heading' : 1
     }
     return render(request, 'Main/index.html', params)
-
-@login_required(login_url='/login')
-def train(request):
-    params = {
-        'title' : 'train'
-    }
-    return render(request, 'Main/train.html', params)
 
 def about(request,no):
     params = {
@@ -37,7 +29,7 @@ def login(request):
             auth.login(request, user)
             if user.is_staff:
                 return redirect('/myAdmin')
-            return render(request, 'Dashboard/dashboard.html')
+            return redirect('/dashboard')
         else:
             messages.info(request, "USERNAME OR PASSWORD DID NOT MATCH !!!")
             return redirect(login)

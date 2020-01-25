@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Main',
     'LiveTracking',
     'Dashboard',
+    'Parcel'
 
 ]
 

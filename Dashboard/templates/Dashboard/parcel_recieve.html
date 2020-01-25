@@ -1,0 +1,43 @@
+{%include 'Main/base.html'%}
+<div class="col-md-12 mt-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Parcels Recieve</li>
+        </ol>
+    </nav>
+</div>
+<div class="col-md-12">
+    <div class="container-fluid">
+        <div class="row">
+            {%for i in parcels%}
+            <div class="col-md-3 py-3">
+                {%if i.status in 'Delivered'%}
+                <div class="card tab-card" style="box-shadow: 0px 0px 10px #33BB33;">
+                    {%else%}
+                    <div class="card tab-card" style="box-shadow: 0px 0px 10px #EF5350;">
+                        {%endif%}
+                        <div class="card-header tab-card-header">
+                            Parcel - {{forloop.counter}}
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active p-3" id="one{{i.id}}" role="tabpanel" aria-labelledby="one-tab">
+                                <div class="float-left pb-3">
+                                    <h5 class="card-title"><small>From</small> {{i.parcel_from}} <small>To</small> {{i.parcel_to}}</h5>
+                                    <p class="card-text">
+                                        <strong>Status</strong> - {{i.status}}<br>
+                                        <strong>Sender</strong> - {{i.sender_name}}<br>
+                                        <strong>Reciever</strong> - {{i.reciever_name}}<br>
+                                        <strong>Phone</strong> - {{i.phone}}
+                                    </p>
+                                    <a href="/dashboard/parcel/{{i.id}}" class="btn btn-primary btn-sm">More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>

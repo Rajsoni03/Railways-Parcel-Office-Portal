@@ -1,0 +1,113 @@
+{%include 'Main/base.html'%}
+
+<div class="col-md-12 mt-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/dashboard/recieve">Parcels Recieve</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Parcel</li>
+        </ol>
+    </nav>
+</div>
+<!-- Modal -->
+{% if model %}
+<script>
+    $(document).ready(function(){
+        $("#exampleModalCenter").modal('show');
+    });
+</script>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Enter OTP</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">{% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="OTP">OTP sended to ******5066</label><br>
+                        <input type="text" class="form-control" name="OTP" id="OTP" placeholder="Enter OTP">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="resend" class="btn btn-secondary">Re-Send OTP</button>
+                    <button type="submit" name="verify" class="btn btn-primary">Verify</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="card border-secondary col-6 " style="max-width: 40rem;">
+            <div class="card-header bg-transparent border-secondary text-secondary">
+                <h2>PARCEL DETAILS :</h2>
+            </div>
+            <div class="card-body text-muted">
+                <h4><b><u>Customers Info</u></b></h4>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6 p-0 m-0 pl-2">
+                            <b>Sender's Name :</b>
+                            <br><b>Sender's Aadhar :</b>
+                            <br><b>Reciever's Name :</b>
+                            <br><b>Reciever's Aadhar :</b>
+                            <br><b>Parcel Status :</b>
+                            <br><b>Parcel ID :</b>
+                            <br><b>Parcel Rfid :</b>
+                            <br><b>Train no. :</b>
+                            <br><b>From-(Station) :</b>
+                            <br><b>To-(Station) :</b>
+                            <br><b>Mobile Number :</b>
+                            <br><b>Date and Time:</b>
+                            <br><b>Parcel information :</b>
+                        </div>
+                        <div class="col-6">
+                            {{parcel.sender_name}}
+                            <br>xxxxxxxx{{parcel.sender_adhar}}
+                            <br>{{parcel.reciever_name}}
+                            <br>xxxxxxxx{{parcel.reciever_adhar}}
+                            <br>{{parcel.status}}
+                            <br>{{parcel.parcel_id}}
+                            <br>{{parcel.rfid}}
+                            <br>{{parcel.train_id}}
+                            <br>{{parcel.parcel_from}}
+                            <br>{{parcel.parcel_to}}
+                            <br>{{parcel.phone}}
+                            <br>{{parcel.date}}
+                            <br>{{parcel.parcel_info}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card col-5 ml-5" style="background-color: #E4EAD9;">
+            <div class="card-header mx-0">
+                <h1>Deliver Parcel</h1>
+            </div>
+            <div class="card-body">
+                <form method="post">{% csrf_token %}
+                    {%if error%}
+                    <div class="alert alert-danger" role="alert">
+                        Something Went Wrong!!!
+                    </div>
+                    {%endif%}
+                    <div class="form-group">
+                        <label for="parcel_id">Parcel ID</label>
+                        <input type="text" class="form-control" id="parcel_id" placeholder="PRxxxxx" name="parcel_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="reciever_adhar">Reciever's Aadhar</label>
+                        <input type="text" class="form-control" id="reciever_adhar" placeholder="123456789012" name="reciever_adhar">
+                    </div>
+                    <button type="submit" name="sendotp" class="btn btn-primary">Send OTP</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

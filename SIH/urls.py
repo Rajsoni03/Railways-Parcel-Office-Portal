@@ -22,6 +22,7 @@ urlpatterns = [
     path('myAdmin', include('MyAdmin.urls')),
     path('', include('Main.urls')),
     path('track', include('LiveTracking.urls')),
+    path('parcel', include('Parcel.urls')),
     path('dashboard', include('Dashboard.urls')),
     path('user', include('User.urls')),
 ]

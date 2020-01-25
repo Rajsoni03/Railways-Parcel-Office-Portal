@@ -6,4 +6,4 @@ from django.contrib.auth.decorators import login_required
 def track(request):
     if request.method == 'POST':
         print(request.POST.get('id', None))
-    return render(request, 'LiveTracking/track.html')
+    return render(request, 'LiveTracking/update.html')
