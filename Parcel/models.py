@@ -21,7 +21,7 @@ class Parcel(models.Model):
     parcel_from = models.CharField(max_length=20)
     parcel_to = models.CharField(max_length=20)
     parcel_info = models.CharField(max_length=200)
-    status = models.CharField(max_length=20, choices=statusChoices)
+    status = models.CharField(max_length=50, choices=statusChoices)
     date = models.DateTimeField(auto_now=True)
 
     class Meta:

@@ -27,7 +27,7 @@ class Train(models.Model):
     station19 = models.CharField(max_length=50, default=0)
     station20 = models.CharField(max_length=50, default=0)
     train_live_station = models.CharField(max_length=50, default=0)
-    train_days = models.CharField(max_length=7)
+    train_days = models.CharField(max_length=50)
     train_from_time = models.TimeField(default=timezone.now())
     train_to_time = models.TimeField(default=timezone.now())
 
