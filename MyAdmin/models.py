@@ -7,4 +7,3 @@ class TestData(models.Model):
     long = models.CharField(max_length=50)
     seal_status = models.BooleanField()
     parcel_status = models.BooleanField()
-

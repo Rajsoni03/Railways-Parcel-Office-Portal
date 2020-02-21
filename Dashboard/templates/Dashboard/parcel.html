@@ -28,6 +28,12 @@
             </div>
             <form method="post">{% csrf_token %}
                 <div class="modal-body">
+                    {%if otpError%}
+                    <div class="alert alert-danger" role="alert">
+                        Something Went Wrong!!!
+                    </div>
+                    {%endif%}
+
                     <div class="form-group">
                         <label for="OTP">OTP sended to ******5066</label><br>
                         <input type="text" class="form-control" name="OTP" id="OTP" placeholder="Enter OTP">
@@ -42,36 +48,49 @@
     </div>
 </div>
 {% endif %}
-<div class="container mt-5">
+<div class="container mt-3">
     <div class="row">
-        <div class="card border-secondary col-6 " style="max-width: 40rem;">
-            <div class="card-header bg-transparent border-secondary text-secondary">
+        <div class="card border-secondary col-md-6 " style="max-width: 40rem;">
+            <div class="card-header bg-transparent border-secondary text-secondary ">
                 <h2>PARCEL DETAILS :</h2>
             </div>
             <div class="card-body text-muted">
-                <h4><b><u>Customers Info</u></b></h4>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-6 p-0 m-0 pl-2">
-                            <b>Sender's Name :</b>
-                            <br><b>Sender's Aadhar :</b>
-                            <br><b>Reciever's Name :</b>
-                            <br><b>Reciever's Aadhar :</b>
-                            <br><b>Parcel Status :</b>
-                            <br><b>Parcel ID :</b>
-                            <br><b>Parcel Rfid :</b>
-                            <br><b>Train no. :</b>
-                            <br><b>From-(Station) :</b>
-                            <br><b>To-(Station) :</b>
-                            <br><b>Mobile Number :</b>
-                            <br><b>Date and Time:</b>
-                            <br><b>Parcel information :</b>
+                        <div class="col-4 p-0 m-0 pl-2">
+                            <b>Sender's Name </b>
+                            <br><b>Sender's Aadhar </b>
+                            <br><b>Reciever's Name </b>
+                            <br><b>Reciever's Aadhar </b>
+                            <br><b>Parcel Status </b>
+                            <br><b>Parcel ID </b>
+                            <br><b>Parcel Rfid</b>
+                            <br><b>Train no.</b>
+                            <br><b>From-(Station)</b>
+                            <br><b>To-(Station) </b>
+                            <br><b>Mobile Number</b>
+                            <br><b>Date and Time</b>
+                            <br><b>Parcel information</b>
                         </div>
-                        <div class="col-6">
+                        <div class="col-2">:
+                            <br>:
+                            <br>:
+                            <br>:
+                            <br>:
+                            <br>:
+                            <br>:
+                            <br>:
+                            <br>:
+                            <br>:
+                            <br>:
+                            <br>:
+                            <br>:
+                        </div>
+                        <div class="col-5">
                             {{parcel.sender_name}}
-                            <br>xxxxxxxx{{parcel.sender_adhar}}
+                            <br>xxxxxxxx{{sender_adhar}}
                             <br>{{parcel.reciever_name}}
-                            <br>xxxxxxxx{{parcel.reciever_adhar}}
+                            <br>xxxxxxxx{{reciever_adhar}}
                             <br>{{parcel.status}}
                             <br>{{parcel.parcel_id}}
                             <br>{{parcel.rfid}}
@@ -86,9 +105,10 @@
                 </div>
             </div>
         </div>
-        <div class="card col-5 ml-5" style="background-color: #E4EAD9;">
+        {%if status%}
+        <div class="card col-md-5 ml-5 px-0 bg-light">
             <div class="card-header mx-0">
-                <h1>Deliver Parcel</h1>
+                <h2>DELIVER PARCEL</h2>
             </div>
             <div class="card-body">
                 <form method="post">{% csrf_token %}
@@ -109,5 +129,15 @@
                 </form>
             </div>
         </div>
+        {%else%}
+        <div class="card col-md-5 ml-5 px-0 bg-light">
+            <div class="card-header mx-0">
+                <h2>DELIVERY DETAILS</h2>
+            </div>
+            <div class="card-body">
+                <b>Delivery Date :</b> {{parcel.done_date}}
+            </div>
+        </div>
+        {%endif%}
     </div>
 </div>

@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 # Create your models here.
 class Notification(models.Model):
     train_ID = models.PositiveIntegerField()
@@ -18,3 +19,12 @@ class Notification(models.Model):
 
     class Meta:
         verbose_name_plural = 'Notification'
+
+
+class Otp(models.Model):
+    parcel_id = models.CharField(max_length=10)
+    otp = models.CharField(max_length=10)
+    date = models.DateTimeField(default=timezone.now())
+
+    class Meta:
+        verbose_name_plural = 'Otp'

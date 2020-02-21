@@ -25,4 +25,5 @@ urlpatterns = [
     path('parcel', include('Parcel.urls')),
     path('dashboard', include('Dashboard.urls')),
     path('user', include('User.urls')),
+    path('api', include('API.urls')),
 ]

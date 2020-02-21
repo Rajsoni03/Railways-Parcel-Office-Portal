@@ -1,5 +1,4 @@
 {%include 'Main/base.html'%}
-
 <div class="col-md-12 mt-2">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -8,69 +7,70 @@
         </ol>
     </nav>
 </div>
-
-<form class="container fluid col-6 mx-auto mt-4" method="post" action="/dashboard/send">{% csrf_token %}
-    <h3>PARCEL REGISTERATION</h3>
-    <div class="card text-dark" style="background-color: #E4EAD9;">
-        <div class="card-body pb-0 pt-1">
-            <div class="form-row">
-                <div class="form-group col-7">
-                    <label for="sender_name">Sender's Name</label>
-                    <input type="text" class="form-control" id="sender_name" name="sender_name">
+<form class="container-fluid mx-auto mt-3" method="post" action="/dashboard/send">{% csrf_token %}
+    <h3 class="text-center">PARCEL REGISTERATION</h3>
+    <dir class="row px-3">
+        <div class=" card text-dark col-6 mx-auto" style="background-color: #E9ECEF;">
+            <div class="card-body pb-0">
+                <div class="form-row">
+                    <div class="form-group col-7">
+                        <label for="sender_name">Sender's Name</label>
+                        <input type="text" class="form-control" id="sender_name" name="sender_name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group col-5">
+                        <label for="sender_adhar">Sender's Aadhar</label>
+                        <input type="text" class="form-control" id="sender_adhar" name="sender_adhar" placeholder="Aadhar No." required>
+                    </div>
                 </div>
-                <div class="form-group col-5">
-                    <label for="sender_adhar">Sender's Aadhar</label>
-                    <input type="text" class="form-control" id="sender_adhar" name="sender_adhar">
+                <div class="form-row">
+                    <div class="form-group col-7">
+                        <label for="reciever_name">Reciever's Name</label>
+                        <input type="text" class="form-control" id="reciever_name" name="reciever_name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group col-5">
+                        <label for="reciever_adhar">Reciever's Aadhar</label>
+                        <input type="text" class="form-control" id="reciever_adhar" name="reciever_adhar" placeholder="Aadhar No." required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-7">
-                    <label for="reciever_name">Reciever's Name</label>
-                    <input type="text" class="form-control" id="reciever_name" name="reciever_name">
-                </div>
-                <div class="form-group col-5">
-                    <label for="reciever_adhar">Reciever's Aadhar</label>
-                    <input type="text" class="form-control" id="reciever_adhar" name="reciever_adhar">
+                <div class="form-row my-1">
+                    <div class="form-group col-4">
+                        <label for="phone">Phone</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone No." required>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="rfid">Parcel RFID</label>
+                        <input type="text" class="form-control" id="rfid" name="rfid" placeholder="RFID No." required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="train_id">Train no.</label>
+                        <select id="train_id" class="form-control" name="train_id" required>
+                            <option selected>xxxxx</option>
+                            {%for i in train%}
+                            <option>{{i.train_no}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card my-2 text-dark" style="background-color: #E4EAD9;">
-        <div class="card-body pb-0 pt-1">
-            <div class="form-row my-1">
-                <div class="form-group col-4">
-                    <label for="phone">Phone</label>
-                    <input type="tel" class="form-control" id="phone" name="phone">
+        <div class="card text-dark col-5 mx-auto" style="background-color: #E9ECEF;">
+            <div class="card-body pb-0">
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="parcel_from">From-(Station)</label>
+                        <input type="text" class="form-control" id="parcel_from" name="parcel_from" value="{{user.first_name}}" placeholder="Station Code" required>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="parcel_to">To-(Station)</label>
+                        <input type="text" class="form-control" id="parcel_to" name="parcel_to" placeholder="Station Code" required>
+                    </div>
                 </div>
-                <div class="form-group col-4">
-                    <label for="rfid">Parcel RFID</label>
-                    <input type="text" class="form-control" id="rfid" name="rfid">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="train_id">Train no.</label>
-                    <select id="train_id" class="form-control" name="train_id">
-                        <option selected>xxxxx</option>
-                        {%for i in train%}
-                          <option>{{i.train_no}}</option>
-                        {%endfor%}
-                    </select>
+                <div class="form-group">
+                    <label for="parcel_info">Parcel description</label>
+                    <textarea class="form-control" id="parcel_info" rows="7" name="parcel_info" placeholder="type here...."></textarea>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-6">
-                    <label for="parcel_from">From-(Station)</label>
-                    <input type="text" class="form-control" id="parcel_from" name="parcel_from">
-                </div>
-                <div class="form-group col-6">
-                    <label for="parcel_to">To-(Station)</label>
-                    <input type="text" class="form-control" id="parcel_to" name="parcel_to">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="parcel_info">Parcel description</label>
-                <textarea class="form-control" id="parcel_info" rows="3" name="parcel_info"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary mb-2">Submit</button>
         </div>
-    </div>
+        <button type="submit" class="btn mt-3 px-3 col-12 btn-primary mb-2">Submit</button>
+    </dir>
 </form>

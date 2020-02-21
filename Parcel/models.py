@@ -1,12 +1,14 @@
 from django.db import models
+
 statusChoices = (
-    ('Pending','Pending'),
-    ('Ordered','Ordered'),
-    ('ShippingSoon','ShippingSoon'),
-    ('Shipped','Shipped'),
-    ('OutForDelivery','OutForDelivery'),
-    ('Delivered','Delivered')
+    ('Pending', 'Pending'),
+    ('Ordered', 'Ordered'),
+    ('ShippingSoon', 'ShippingSoon'),
+    ('Shipped', 'Shipped'),
+    ('OutForDelivery', 'OutForDelivery'),
+    ('Delivered', 'Delivered')
 )
+
 
 # Create your models here.
 class Parcel(models.Model):
@@ -23,6 +25,7 @@ class Parcel(models.Model):
     parcel_info = models.CharField(max_length=200)
     status = models.CharField(max_length=50, choices=statusChoices)
     date = models.DateTimeField(auto_now=True)
+    done_date = models.DateTimeField(null=True)
 
     class Meta:
         verbose_name_plural = 'Parcel'
