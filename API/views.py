@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from LiveTracking.models import LiveTracking
 from Dashboard.models import Notification
+from datetime import datetime
 
 
 # Create your views here.
@@ -38,3 +39,28 @@ def setLocation(request):
             ).save()
             status = False
     return JsonResponse(data={'status': status})
+
+
+def pi(request):
+    status = False
+    try:
+        train_ID = request.GET.get('train_ID', None)
+        lat = request.GET.get('lat', None)
+        long = request.GET.get('long', None)
+        seal_status = request.GET.get('seal_status', None)
+        parcel_status = request.GET.get('parcel_status', None)
+        date = datetime.now()
+        status = True
+    except:
+        status = False
+    print(train_ID, status)
+    data = {
+        'train_ID': train_ID,
+        'lat': lat,
+        'long': long,
+        'seal_status': seal_status,
+        'parcel_status': parcel_status,
+        'date': date,
+        'status': status
+    }
+    return JsonResponse(data=data)

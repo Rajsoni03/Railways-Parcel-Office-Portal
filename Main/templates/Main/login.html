@@ -1,15 +1,28 @@
 {% include 'Main/base.html' %}
-<div class="m-4">
-    <form action ='login' method ='post'>
-        {% csrf_token %}
-        <input type="text" name="username" placeholder="username"/><br>
-        <input type="password" name="password" placeholder="password"/><br>
-        <input type="submit">
-    </form>
-    <div>
-        {%for message in messages %}
-        {{message}}
-        {%endfor%}
-    </div>
-    <a href = "/register" >register </a
-</div>
+<div class="container-fluid mt-5 pt-5">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card-pf">
+                <h1>Log In to Your Account</h1>
+                <form action='login' method='post'>{% csrf_token %}
+                    <div class="form-group">
+                        {%if messages%}
+                        {%for message in messages %}                                    
+                            <label class="text-danger" for="exampleInputEmail1">{{message}}</label>
+                        {%endfor%}
+                        {%else%}
+                            <label for="exampleInputEmail1">Username</label>
+                        {%endif%}                        
+                        <input type="email" class="form-control  input-lg" id="exampleInputEmail1" placeholder="Username" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control input-lg" id="exampleInputPassword1" placeholder="Password" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Log In</button>
+                </form>
+                <p class="login-pf-signup">Need an account?<a href="/register"> Register Here</a></p>
+            </div><!-- card -->
+        </div><!-- col -->
+    </div><!-- row -->
+</div><!-- container -->
