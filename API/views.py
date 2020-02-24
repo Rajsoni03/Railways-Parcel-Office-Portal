@@ -64,3 +64,4 @@ def pi(request):
         'status': status
     }
     return JsonResponse(data=data)
+    # return render(request, 'Main/base.html')
