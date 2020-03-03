@@ -49,11 +49,12 @@ def pi(request):
         long = request.GET.get('long', None)
         seal_status = request.GET.get('seal_status', None)
         parcel_status = request.GET.get('parcel_status', None)
+        rfid = request.GET.get('rfid', None)
         date = datetime.now()
         status = True
     except:
         status = False
-    print(train_ID, status)
+    print(rfid)
     data = {
         'train_ID': train_ID,
         'lat': lat,
@@ -61,7 +62,10 @@ def pi(request):
         'seal_status': seal_status,
         'parcel_status': parcel_status,
         'date': date,
+        'rfid': rfid,
         'status': status
     }
     return JsonResponse(data=data)
 
+def test(request):
+    return render(request, 'Main/base.html')
